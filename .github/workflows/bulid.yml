@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 permissions:
   contents: write
@@ -45,7 +45,7 @@ jobs:
     - name: Build Docker image
       run: |
         cd ${{ github.workspace }}
-        docker build -t my-spring-boot-app -f Dockerfile .
+        docker build -t my-spring-boot-web -f Dockerfile .
         docker tag my-spring-boot-web jvlearning/my-spring-boot-web:latest
     - name: Push Docker image to DockerHub
       run: | 

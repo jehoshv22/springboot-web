@@ -50,7 +50,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>my-spring-boot-app</finalName>
+		<finalName>my-spring-boot-web</finalName>
 	</build>
 
 </project>

@@ -90,6 +90,5 @@
     },
     "registeredAt": "2025-04-23T13:50:42.276Z",
     "registeredBy": "arn:aws:sts::571600845871:assumed-role/AWSReservedSSO_AdministratorAccess_c600e5c7308addfd/jehosh@hotmail.com",
-    "enableFaultInjection": false,
     "tags": []
 }

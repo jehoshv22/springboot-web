@@ -17,11 +17,9 @@ jobs:
 
       - name: Build Project
         run: mvn -B package --file pom.xml
-      - name: Identify the built .jar file
+      - name: Get JAR file
         id: jar
-        run: |
-        # Assuming the generated jar file is in the target directory
-        #echo "::set-output name=jar_file::$(ls target/*.jar | head -n 1)"
+        run: echo "jar_file=$(ls target/*.jar | head -n 1)" >> $GITHUB_OUTPUT
       - name: Verify JAR file
         run: |
          ls -l ${{ steps.jar.outputs.jar_file }}

@@ -1,0 +1,38 @@
+name: Deploy aws-vpc-public-subnet-ecs-task-service
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: "Configure AWS Credentials"
+      uses: aws-actions/configure-aws-credentials@v4.1.0
+      with:
+        aws-region:  ${{vars.AWS_REGION }}
+        aws-access-key-id:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: AWS Deploy - VPC creation,ECS cluster, task definition and service
+      uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+      with:
+        # The name of the CloudFormation stack
+        name: FJV-VPC-ECS-Cluster-TaskDef-Service
+        template: ecs-infra.yaml
+        # The comma-delimited list of stack template capabilities to acknowledge. Defaults to 'CAPABILITY_IAM'
+        capabilities: CAPABILITY_IAM
+        # The parameters to override in the stack inputs. You can pass a comma-delimited list or a file URL. Comma-delimited list has each entry formatted as <ParameterName>=<ParameterValue> or <ParameterName>="<ParameterValue>,<ParameterValue>". A JSON file can be a local file with a "file://" prefix or remote URL. The file should look like: [ { "ParameterKey": "KeyPairName", "ParameterValue": "MyKey" }]
+        # parameter-overrides: # optional
+        no-fail-on-empty-changeset: 1
+          

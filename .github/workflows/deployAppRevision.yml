@@ -1,4 +1,4 @@
-name: Deploy to AWS ECS
+name: deployAppRevision
 on:
  workflow_dispatch:
 jobs:
